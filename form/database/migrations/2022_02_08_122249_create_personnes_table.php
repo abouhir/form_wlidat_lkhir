@@ -19,7 +19,14 @@ class CreatePersonnesTable extends Migration
             $table->string("name");
             $table->string("fonctionnelle");
             $table->text("competences");
-            $table->foreignIdFor(Responsable::class);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('responsable_id');
+            $table->foreign('responsable_id')
+            ->references('id')->on('responsables')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

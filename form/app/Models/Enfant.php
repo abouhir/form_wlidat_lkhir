@@ -15,7 +15,25 @@ class Enfant extends Model
         "taille_chaussure" , 
         "niveaux_etd" , 
         "moyenne_s1" , 
-        "moyenne_s2"
+        "moyenne_s2" , 
+        "responsable_id" ,
+        "user_id" , 
+        "mot"
     ];
+
+    public function user()
+
+    
+    {
+        return $this->belongsTo(User::class,"user_id");
+        
+    }
+    public function responsable()
+
+    
+    {
+        return $this->belongsTo(Responsable::class,"responsable_id");
+        
+    }
 
 }

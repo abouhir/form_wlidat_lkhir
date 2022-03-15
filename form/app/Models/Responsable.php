@@ -10,9 +10,30 @@ class Responsable extends Model
     use HasFactory;
     
     protected $fillable = [
+        "user_id" ,
+        "name",
         "cin",
         "situation" , 
         "adresse" , 
-        "telephone"
+        "telephone" , 
+        "mot"
     ];
+
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+  
+    public function personnes()
+    {
+        return $this->hasMany(Personne::class, 'responsable_id');
+    }
+
+    public function enfants()
+    {
+        return $this->hasMany(Enfant::class, 'responsable_id');
+    }
 }

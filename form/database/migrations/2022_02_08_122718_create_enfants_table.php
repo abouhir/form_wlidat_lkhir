@@ -22,7 +22,14 @@ class CreateEnfantsTable extends Migration
             $table->string("niveaux_etd");
             $table->float("moyenne_s1");
             $table->float("moyenne_s2");
-            $table->foreignIdFor(Responsable::class);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('responsable_id');
+            $table->foreign('responsable_id')
+            ->references('id')->on('responsables')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

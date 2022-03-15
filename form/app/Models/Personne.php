@@ -12,6 +12,20 @@ class Personne extends Model
     protected $fillable=[
         "name" , 
         "fonctionnelle" , 
-        "competence"
+        "competences" ,
+        "user_id" , 
+        "responsable_id" , 
+        "mot"
     ];
+
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function responsable(){
+        return $this->belongsTo(Responsable::class, 'responsable_id');
+    }
 }

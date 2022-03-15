@@ -3,83 +3,93 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personne;
+use App\Models\Responsable;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class PersonneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   public function __construct()
+   {
+        $this->middleware('auth');
+   }
     public function index()
     {
-        //
+        $personnes= Auth::user()->personnes;
+        return view("personne.index")->with("personnes",$personnes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        $responsables = Auth::user()->responsables;
+        return view("personne.create")->with("responsables",$responsables);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        
+        $validated = $request->validate([
+            "name" => "required|max:255" , 
+            "fonctionnelle" => "required" , 
+            "competences" => "required" , 
+        ]);
+
+        $personne = Personne::create([
+            "name"=>$request->name , 
+            "fonctionnelle" => $request->fonctionnelle , 
+            "competences" => $request->competences ,
+            "user_id" => Auth::id() , 
+            "responsable_id" => $request->responsable , 
+            "mot" =>Crypt::encryptString((Personne::max('id')+1)."".$request->name)
+        ]);
+       
+
+        return redirect()->route("personne.index");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Personne  $personne
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Personne $personne)
+    
+    public function show($mot)
     {
-        //
+        $personne=Personne::all()->where("mot",$mot)->first();
+        return view("personne.show")->with("personne",$personne);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Personne  $personne
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Personne $personne)
+   
+    public function edit($mot)
     {
-        //
+        $personne = Personne::all()->where("mot",$mot)->first();
+        $responsables = Auth::user()->responsables;
+        return view("personne.edit")->with(["personne" => $personne , "responsables" => $responsables]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Personne  $personne
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Personne $personne)
+    
+    public function update(Request $request, $mot)
     {
-        //
+        $personne = Personne::all()->where("mot",$mot)->first();
+        $validated = $request->validate([
+            "name" => "required|max:255" , 
+            "fonctionnelle" => "required" , 
+            "competences" => "required" , 
+        ]);
+
+        
+            $personne->name=$request->name ;
+            $personne->fonctionnelle = $request->fonctionnelle ;
+            $personne->competences = $request->competences ;
+            $personne->responsable_id= $request->responsable ;
+            $personne->save();  
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Personne  $personne
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Personne $personne)
+    
+    public function destroy($mot)
     {
-        //
+        $personne = Personne::all()->where("mot",$mot)->first()->delete();
+
+        return redirect()->route("personne.index");
     }
 }

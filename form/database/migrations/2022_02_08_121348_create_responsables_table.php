@@ -15,10 +15,15 @@ class CreateResponsablesTable extends Migration
     {
         Schema::create('responsables', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
             $table->string("cin");
             $table->string("situation");
             $table->text("adresse");
             $table->string("telephone");
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-gd": "*",
+        "elibyy/tcpdf-laravel": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
@@ -56,8 +58,12 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
-    },
+        "sort-packages": true , 
+      
+        "platform":{"php":"8.0.0"}
+        }
+    ,
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true 
+    
 }

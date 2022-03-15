@@ -52,4 +52,52 @@ html, body {margin: 20; height: 100%; overflow: hidden}
     width: 50px;
 }
 
+.scrollbar{
+    overflow-y: auto;
+    height: 600px;
+}
+
+.table-head{
+    background-color: #E7D09E;
+}
+
+.number-rtl{
+    text-align: right;
+}
+.text-show{
+    font-family: "Cairo";
+   
+}
+.text-lbl{
+    color: #E7D09E;
+}
+.show-hd-ft-clr{
+    background-color: #e7d09e73;
+}
+.home-card{
+    border-radius: 25px 25px 25px 25px  ;
+    border: #E7D09E solid;
+    box-shadow:#E7D09E -5px 5px 5px ;
+}
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031; /* High z-index so it is on top of the page */
+    top: calc( 50% - ( 20px / 2) ); /* where ... is the element's height */
+    right : calc( 50% - ( 30px / 2) ); /* where ... is the element's width */
+    color: #E7D09E;
+    
+  }
+
+  #backdrop {
+    position:absolute;
+    top:0;
+    right: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color:rgb(0,0,0,0.2);
+  }
+
+
 
