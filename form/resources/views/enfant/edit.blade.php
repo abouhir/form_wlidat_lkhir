@@ -17,7 +17,7 @@
             {{$item}}
         @endforeach
     </div>
-   <form action="{{route('enfant.update',$enfant->mot)}}" method="post">
+   <form action="{{route('enfant.update',$enfant->mot)}}" id="frm" method="post">
     @csrf 
     @method("PUT")
 
@@ -90,7 +90,7 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-2 col-10 ">
-            <input type="submit" name="submit" id="submit" class="btn  d-grid col-12 btn-form" value="تحديث"  />
+            <input type="button" name="btnsubmit" id="btnsubmit" class="btn  d-grid col-12 btn-form" value="تحديث"  />
         </div>
         </div>
     </div>
@@ -99,4 +99,16 @@
 </form>
     
 </div>
+
+@if(Session::get('message'))
+    <script >
+      alertSuccess("{!!Session::get('message')!!}")
+    </script>
+@endif
+
+<script>
+    var submit = document.getElementById("btnsubmit");
+    var form = document.getElementById("frm");
+    alertUpdate(submit,form);
+</script>
 @endsection

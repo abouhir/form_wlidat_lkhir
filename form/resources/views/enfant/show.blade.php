@@ -20,10 +20,10 @@
       <p class="card-text fs-4 text-show"><span class="text-lbl">  معدل الأسدس الأول  :</span> {{$enfant->moyenne_s1}}</p>
       <p class="card-text fs-4 text-show"><span class="text-lbl">  معدل الأسدس الثاني  :</span> {{$enfant->moyenne_s2}}</p>
       <a href="{{route("enfant.edit",$enfant->mot)}}" class="card-link text-warning"><i class="fa-solid fa-pen fa-lg"></i></a>
-      <form action="{{route("enfant.delete",$enfant->mot)}}" method="post" style="display : inline">
+      <form action="{{route("enfant.delete",$enfant->mot)}}" method="post" id="frm" style="display : inline">
         @csrf
         @method("DELETE")
-      <button type="submit" class="card-link text-danger btn"><i class="fa-solid fa-trash-can fa-lg" ></i></button>
+      <button type="button" id="btnsubmit" class="card-link text-danger btn"><i class="fa-solid fa-trash-can fa-lg" ></i></button>
      </form>
     </div>
     <div class="card-footer show-hd-ft-clr text-muted ">
@@ -31,4 +31,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  var submit = document.getElementById("btnsubmit");
+  var form = document.getElementById("frm");
+    alertDelete(submit,form);
+  </script>
 @endsection

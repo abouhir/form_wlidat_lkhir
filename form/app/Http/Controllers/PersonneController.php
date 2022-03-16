@@ -82,7 +82,7 @@ class PersonneController extends Controller
             $personne->competences = $request->competences ;
             $personne->responsable_id= $request->responsable ;
             $personne->save();  
-        return redirect()->back()->with("message","تم التحديث بنجاح");;
+        return redirect()->back()->with("message","تم التحديث بنجاح");
     }
 
     

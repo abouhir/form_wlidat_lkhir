@@ -55,7 +55,7 @@ class EnfantController extends Controller
          "mot" => Crypt::encryptString((Enfant::max('id')+1)."".$request->name)
          ]) ; 
 
-         return redirect()->route("enfant.index");
+         return redirect()->route("enfant.index")->with("message","تم الإنشاء بنجاح");
 
      
        
@@ -99,7 +99,7 @@ class EnfantController extends Controller
             $enfant->moyenne_s2=$request->moyenne_s2 ;
             $enfant->responsable_id=$request->responsable ;
             $enfant->save();
-            return redirect()->back();
+            return redirect()->back()->with("message","تم التحديث بنجاح");
     }
 
    
@@ -107,6 +107,6 @@ class EnfantController extends Controller
     {
         $enfant = Enfant::all()->where("mot",$mot)->first();
         $enfant->delete();
-        return redirect()->back();
+        return redirect()->route("enfant.index")->with("message","تم الحدف بنجاح");
     }
 }
