@@ -67,7 +67,7 @@ class HomeController extends Controller
     $lg['w_page'] = 'page';
     $pdf->setLanguageArray($lg);
     $pdf->setFont('aealarabiya','',15);
-    $pdf->Text(85, 0, 'المشرف: '.$responsable->user->name);
+    $pdf->Text(85, 5, 'المشرف: '.$responsable->user->name);
     $pdf->setFont('aealarabiya','',20);
     $pdf->Text(80, 17, 'الحالةالمستفيدة');
     

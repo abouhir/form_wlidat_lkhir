@@ -63,13 +63,7 @@ class ResponsableController extends Controller
         return view("responsable.edit")->with("responsable",$responsable);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Responsable  $responsable
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request,$mot)
     {
         $responsable = Responsable::all()->where("mot",$mot)->first();
@@ -91,7 +85,7 @@ class ResponsableController extends Controller
        
         $responsable->save();
 
-        return redirect()->back();
+        return redirect()->back()->with("message","تم التحديث بنجاح");
     }
 
     public function search(Request $request){
@@ -103,6 +97,6 @@ class ResponsableController extends Controller
     public function destroy($mot)
     {
         $responsable = Responsable::all()->where("mot",$mot)->first()->delete();
-        return redirect()->route("responsable.index");
+        return redirect()->route("responsable.index")->with("message","تم الحدف بنجاح");
     }
 }

@@ -20,10 +20,10 @@
       <h6 class="card-subtitle mb-2 text-muted">Cin: {{$item->cin}} / Tel : {{$item->telephone}}</h6>
       <p class="card-text text-break">{{$item->adresse}}</p>
       <a href="{{route("responsable.edit",$item->mot)}}" class="card-link text-warning"><i class="fa-solid fa-pen fa-lg"></i></a>
-      <form action="{{route("responsable.delete",$item->mot)}}" method="post" style="display : inline">
+      <form action="{{route("responsable.delete",$item->mot)}}" method="post" class="frm" style="display : inline">
         @csrf
         @method("DELETE")
-      <button type="submit" class="card-link text-danger btn"><i class="fa-solid fa-trash-can fa-lg" ></i></button>
+      <button type="button" id="btnsubmit" name="btnsubmit" class="card-link text-danger btn btnsubmit"><i class="fa-solid fa-trash-can fa-lg" ></i></button>
      </form>
      <a href="{{route("responsable.show",$item->mot)}}" class="card-link text-info"><i class="fa-solid fa-eye fa-lg"></i></a>
     </div>
@@ -36,7 +36,19 @@
 
 
 </div>
+@if(Session::get('message'))
+    <script >
+      alertSuccess("{!!Session::get('message')!!}")
+    </script>
+@endif
+
 <script>
+    var submit = document.getElementsByClassName("btnsubmit");
+    var forms = document.getElementsByClassName("frm");
   
+    for(var i=0 ; i<forms.length ; i++){
+      alertDelete(submit[i],forms[i]);
+      
+    }
 </script>
 @endsection

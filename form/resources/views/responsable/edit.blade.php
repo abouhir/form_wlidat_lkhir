@@ -10,8 +10,8 @@
 @section('content')
 
 
-<div class="container">
-   <form action="{{route('responsable.update',$responsable->mot)}}" method="post">
+<div class="container scrollbar">
+   <form onsubmit="return isValid()" action="{{route('responsable.update',$responsable->mot)}}" method="post" id="frm" >
     @csrf 
     @method("PUT")
     <div class="row mt-3">
@@ -32,7 +32,7 @@
             <div class="d-flex justify-content-center">
             <div class="col-md-5 col-10 ">
                 <select name="situation" id="situation" class="form-select input-form " required>
-                    <option value="" disabled selected>{{$responsable->situation}}</option>
+                    <option value="{{$responsable->situation}}" >--{{$responsable->situation}}--</option>
                     <option   value="متزوج"   >    متزوج                 </option>
                     <option value="عازب">عازب</option>
                     <option value="وحيد">وحيد</option>
@@ -59,15 +59,27 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-2 col-10 ">
-            <input type="submit" name="submit" id="submit" class="btn  d-grid col-12 btn-form" value="تحديث"  />
+            <input type="button"  name="btnSubmit" id="btnsubmit" class="btn  d-grid col-12 btn-form" value="تحديث"  />
         </div>
         </div>
     </div>
-    
 
-</form>
+
     
 </div>
+</form>
+ @if(Session::get('message'))
+    <script >
+      alertSuccess("{!!Session::get('message')!!}")
+    </script>
+@endif
+
+<script>
+    var submit = document.getElementById("btnsubmit");
+    var form = document.getElementById("frm");
+    alertUpdate(submit,form);
+</script>
+
 @endsection
 
 
