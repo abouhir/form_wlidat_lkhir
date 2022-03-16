@@ -48,7 +48,7 @@ class PersonneController extends Controller
         ]);
        
 
-        return redirect()->route("personne.index");
+        return redirect()->route("personne.index")->with("message","تم الإنشاء بنجاح");
     }
 
     
@@ -82,7 +82,7 @@ class PersonneController extends Controller
             $personne->competences = $request->competences ;
             $personne->responsable_id= $request->responsable ;
             $personne->save();  
-        return redirect()->back();
+        return redirect()->back()->with("message","تم التحديث بنجاح");;
     }
 
     
@@ -90,6 +90,6 @@ class PersonneController extends Controller
     {
         $personne = Personne::all()->where("mot",$mot)->first()->delete();
 
-        return redirect()->route("personne.index");
-    }
+        return redirect()->route("personne.index")->with("message","تم الحدف بنجاح");
+}
 }

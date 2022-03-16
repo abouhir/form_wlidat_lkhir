@@ -17,10 +17,10 @@
       <p class="card-text fs-4 text-show"><span class="text-lbl">عامل  :</span> {{$personne->fonctionnelle}}</p>
       <p class="card-text fs-4 text-show"><span class="text-lbl"> المهاراة :</span> {{$personne->competences}}</p>
       <a href="{{route("personne.edit",$personne->mot)}}" class="card-link text-warning"><i class="fa-solid fa-pen fa-lg"></i></a>
-      <form action="{{route("personne.delete",$personne->mot)}}" method="post" style="display : inline">
+      <form action="{{route("personne.delete",$personne->mot)}}" method="post" id="frm" style="display : inline">
         @csrf
         @method("DELETE")
-      <button type="submit" class="card-link text-danger btn"><i class="fa-solid fa-trash-can fa-lg" ></i></button>
+      <button type="button" name="btnsubmit" id="btnsubmit" class="card-link text-danger btn"><i class="fa-solid fa-trash-can fa-lg" ></i></button>
      </form>
     </div>
     <div class="card-footer show-hd-ft-clr text-muted ">
@@ -28,4 +28,11 @@
     </div>
   </div>
 </div>
+
+<script>
+var submit = document.getElementById("btnsubmit");
+var form = document.getElementById("frm");
+  alertDelete(submit,form);
+</script>
+
 @endsection

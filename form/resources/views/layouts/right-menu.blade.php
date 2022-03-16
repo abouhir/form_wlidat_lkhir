@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-12">
                 <div class="d-flex justify-content-center" >
-                    <img   class="col-md-5 col-8 img-fluid"   src="{{asset("images/wlidat-lkhir.jpg")}}" alt="logo wlidat lkhir" />
+                    <img   class="col-md-5 col-8 rounded-circle img-fluid" src="{{asset("images/wlidat-lkhir.jpg")}}" alt="logo wlidat lkhir" />
                 </div>
             </div>
             </div>
