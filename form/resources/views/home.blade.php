@@ -10,7 +10,9 @@
 @section('content')
 
 <div class="container">
-    <div class="row ms-2 scrollbar">
+    <div class="row ms-2 scrollbar py-4">
+        @if (count($responsables)>0)
+            
         
         @foreach ($responsables as $item) 
       
@@ -27,8 +29,17 @@
      </div>
     
         @endforeach
-    
-      
-    </div>
+
+        @else
+        <div class="offset-md-3 col-md-6 col-12">
+            <div class="d-flex justify-content-center">
+                <figure>                
+                    <img src="{{asset("images/no-data.png")}}" class="img-fluid"  alt="no data" />
+                <figcaption class="text-center text-muted pb-5">لا توجد أي بيانات</figcaption>
+                </figure>
+            </div>
+        </div>
+    @endif
+</div>
 </div>
 @endsection

@@ -54,7 +54,7 @@ html, body {margin: 20; height: 100%; overflow: hidden}
 
 .scrollbar{
     overflow-y: auto;
-    height: 600px;
+    height: 100vh;
 }
 
 .table-head{
@@ -97,6 +97,12 @@ html, body {margin: 20; height: 100%; overflow: hidden}
     height: 100vh;
     z-index: 999;
     background-color:rgb(0,0,0,0.2);
+  }
+
+  figcaption{
+      font-family: "cairo";
+      font-size: 50px;
+      
   }
 
 

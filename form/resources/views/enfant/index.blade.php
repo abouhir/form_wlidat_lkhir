@@ -8,7 +8,8 @@
 ])
 
 @section('content')
-<div class="container scrollbar"> 
+<div class="container scrollbar py-4"> 
+    @if (count($enfants)>0)
     <div class="col-12">
     <div class="d-flex justify-content-center">
        
@@ -42,6 +43,16 @@
         </table>
     </div>
     </div>
+    @else 
+<div class="offset-md-3 col-md-6 col-12">
+  <div class="d-flex justify-content-center">
+      <figure>                
+          <img src="{{asset("images/no-data.png")}}" class="img-fluid"  alt="no data" />
+      <figcaption class="text-center text-muted pb-5">لا توجد أي بيانات</figcaption>
+      </figure>
+  </div>
+</div>
+@endif
 </div>
 @if(Session::get('message'))
     <script >

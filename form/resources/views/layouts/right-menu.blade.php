@@ -36,8 +36,11 @@
                 <div class="row">
                     <div class="col-12">
                 <div class="d-flex justify-content-center" >
+                  
                     <img   class="col-md-5 col-8 rounded-circle img-fluid" src="{{asset("images/wlidat-lkhir.jpg")}}" alt="logo wlidat lkhir" />
-                </div>
+                   
+                    
+            </div>
             </div>
             </div>
 
@@ -140,7 +143,7 @@
             </div>
         </nav>
        
-        <main class="py-4">
+        <main class="">
             <div class="row">
                 @yield('content')
             </div>
