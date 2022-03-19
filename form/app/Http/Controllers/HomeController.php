@@ -23,7 +23,11 @@ class HomeController extends Controller
   
     public function index()
     {
-        $responsables = Auth::user()->responsables;
+        if(Auth::user()->role=='admin'){
+            $responsables = Responsable::all();
+        }else{
+            $responsables = Auth::user()->responsables;
+        }
         return view('home')->with(["responsables"=>$responsables]);
     }
     public function show($mot){
@@ -79,7 +83,7 @@ class HomeController extends Controller
     $pdf->Image($img_file, 170, 5, 30, 30, '', '', '', false, 350, '', false, false, 0);
     
     $pdf->writeHTML($html_content, true, false, true, false, '');
-        
+    ob_end_clean();
     $pdf->Output();
   
     }

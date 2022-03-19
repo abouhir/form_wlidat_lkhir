@@ -3,14 +3,14 @@
    "action" => "add" , 
    "search" => false,
    "page_active" => "enfant" , 
-   "lien_show" => "responsable.index",
-   "lien_create" => "responsable.create"
+   "lien_show" => "enfant.index",
+   "lien_create" => "enfant.create"
 ])
 
 @section('content')
 
 
-<div class="container scrollbar">
+<div class="container scrollbar py-4">
 
     <div>
         @foreach ($errors->all() as $item)
@@ -59,7 +59,7 @@
         <div class="row mt-3">
             <div class="d-flex justify-content-center">
             <div class="col-md-5 col-10 ">
-              <input class="form-control input-form number-rtl"  type="number"  name="taille_chaussure" id="taille_chaussure" placeholder="قياس الحداء" required />
+              <input class="form-control input-form number-rtl"  type="number" step="0.1" min="0"  name="taille_chaussure" id="taille_chaussure" placeholder="قياس الحداء" required />
             </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-5 col-10 ">
-            <input class="form-control input-form number-rtl" type="number" name="moyenne_s1" id="moyenne_s1" placeholder="معدل الأسدس الأول(*)" required />
+            <input class="form-control input-form number-rtl" type="number" step="0.01" min="0" max="20" name="moyenne_s1" id="moyenne_s1" placeholder="معدل الأسدس الأول(*)" required />
         </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-5 col-10 ">
-            <input class="form-control input-form number-rtl" type="number" name="moyenne_s2" id="moyenne_s2" placeholder="معدل الأسدس الأول(*)" required />
+            <input class="form-control input-form number-rtl" type="number" step="0.01" min="0" max="20" name="moyenne_s2" id="moyenne_s2" placeholder="معدل الأسدس الأول(*)" required />
         </div>
         </div>
     </div>

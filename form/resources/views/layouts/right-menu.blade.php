@@ -30,7 +30,7 @@
     
     <div class="row">
         <div class="col-2  ps-0 " id="right-menu" style="display: inline">
-            <div class="right-menu" >
+            <div class="right-menu scrollbar" >
 
                 <!-- logo wlidat lkhir -->
                 <div class="row">
@@ -80,10 +80,23 @@
         
     </div>
     </div>
+    @if (Auth::user()->role=="admin")
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+           
+        <a href="{{ route('register') }}" class="@php echo  $page_active=="admin" ? "lien-active" : "lien-menu" @endphp" href="{{route("enfant.index")}}">
+            <i class="fa-solid fa-user-plus fa-lg"></i><span class="d-none d-md-block">إضافة مشرف</span>
+           
+        </a>
+                            
+           
+    </div>  
+    </div>
+    @endif
 
     <div class="row mt-5">
         <div class="col-12 text-center">
-            <a class="lien-menu" href="{{ route('logout') }}"
+            <a class="lien-menu"  href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();"><i class="fa-solid fa-right-from-bracket fa-lg"></i><span class="d-none d-md-block"> تسجيل الخروج</span></a>
      
@@ -96,6 +109,8 @@
            
 </div>  
 </div>
+
+
             </div>
 
         </div>
@@ -108,7 +123,7 @@
                 <a class="navbar-brand text-right" id="img-right-menu">
                     <i class="fa-solid fa-bars fa-lg " id="icon" ></i>      
                 </a>  
-                <a class="navbar-brand text-right " href="{{ url('/') }}">
+                <a class="navbar-brand text-right ">
                  
                 {{$page_name}}   
                 </a>
@@ -129,21 +144,25 @@
                     @endif
 
                     <!-- Right Side Of Navbar -->
-                    @if ($page_active!="home")
                     <ul class="navbar-nav ms-auto">
+                    @if ($page_active!="home" && $page_active!="admin"  )
+                    
                         <!-- Authentication Links -->
                      
                         <a href="{{route($lien_show)}}" class="@php echo  $action=="show" ? "lien-active" : "lien-menu" @endphp  me-md-3  "> عرض</a>
                         <a href="{{route($lien_create)}}" class="@php echo  $action=="add" ? "lien-active" : "lien-menu" @endphp  me-md-3  ">إنشاء </a>
                         <a href="{{route($lien_show)}}" class="@php echo  $action=="update" ? "lien-active" : "lien-menu" @endphp  me-md-3  "> تحديث</a>
-                        
-                    </ul>
+                      
+                       
+                    
                     @endif
+                    <a class="fs-5 lien-menu text-danger text-md-right text-center ms-md-5" > المشرف : {{Auth::user()->name}}</a>
+                </ul>
                 </div>
             </div>
         </nav>
        
-        <main class="">
+        <main class="ms-4">
             <div class="row">
                 @yield('content')
             </div>
@@ -167,7 +186,10 @@
               
             }
         }) ; 
+   
     </script>
+
+
 
 </body>
 </html>

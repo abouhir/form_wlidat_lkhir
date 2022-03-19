@@ -25,7 +25,7 @@
         <div class="d-flex justify-content-center">
         <div class="col-md-5 col-10 ">
             <select name="responsable" id="responsable" class="input-form form-select  " required>
-                <option value="{{$enfant->responsable->id}}"  selected>{{$enfant->responsable->name}} </option>
+                <option value="{{$enfant->responsable->id}}"  selected><--{{$enfant->responsable->name}}--></option>
                 @foreach ($responsables as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
@@ -48,7 +48,7 @@
             <div class="d-flex justify-content-center">
             <div class="col-md-5 col-10 ">
                 <select name="taille_vtm" id="taille_vtm" class="form-select input-form " required>
-                    <option value="{{$enfant->taille_vtm}}" selected>{{$enfant->taille_vtm}}</option>
+                    <option value="{{$enfant->taille_vtm}}" selected><--{{$enfant->taille_vtm}}--></option>
                     <option   value="S">S</option>
                     <option value="M">M</option>
                     <option value="XL">XL</option>
@@ -59,7 +59,7 @@
         <div class="row mt-3">
             <div class="d-flex justify-content-center">
             <div class="col-md-5 col-10 ">
-              <input class="form-control input-form number-rtl"  value="{{$enfant->taille_chaussure}}" type="number"  name="taille_chaussure" id="taille_chaussure" placeholder="قياس الحداء" required />
+              <input class="form-control input-form number-rtl"  value="{{$enfant->taille_chaussure}}" type="number" step="0.1" min="0"  name="taille_chaussure" id="taille_chaussure" placeholder="قياس الحداء" required />
             </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-5 col-10 ">
-            <input class="form-control input-form number-rtl" type="number" value="{{$enfant->moyenne_s1}}" name="moyenne_s1" id="moyenne_s1" placeholder="معدل الأسدس الأول(*)" required />
+            <input class="form-control input-form number-rtl" type="number" step="0.01" min="0" max="20" value="{{$enfant->moyenne_s1}}" name="moyenne_s1" id="moyenne_s1" placeholder="معدل الأسدس الأول(*)" required />
         </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-5 col-10 ">
-            <input class="form-control input-form number-rtl" type="number" value="{{$enfant->moyenne_s2}}" name="moyenne_s2" id="moyenne_s2" placeholder="معدل الأسدس الأول(*)" required />
+            <input class="form-control input-form number-rtl" type="number" step="0.01" min="0" max="20" value="{{$enfant->moyenne_s2}}" name="moyenne_s2" id="moyenne_s2" placeholder="معدل الأسدس الأول(*)" required />
         </div>
         </div>
     </div>

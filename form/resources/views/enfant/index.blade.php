@@ -10,10 +10,10 @@
 @section('content')
 <div class="container scrollbar py-4"> 
     @if (count($enfants)>0)
-    <div class="col-12">
+    <div class="col-12 pb-4">
     <div class="d-flex justify-content-center">
        
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered text-break text-show">
             <thead class="table-head text-center ">
                 <th class="col">الإسم</th>
                 <th class="col">رب الأسرة</th>
@@ -23,9 +23,9 @@
             <tbody>
                 @foreach ($enfants as $item)
                     <tr class="text-center">
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->responsable->name}}</td>
-                    <td>{{$item->user->name}}</td>
+                    <td class="">{{$item->name}}</td>
+                    <td class="text-break text-show">{{$item->responsable->name}}</td>
+                    <td class="text-break text-show"> {{$item->user->name}}</td>
                    
                     <td>      
                         <a href="{{route("enfant.edit",$item->mot)}}" class="card-link text-warning"><i class="fa-solid fa-pen fa-lg"></i></a>
@@ -39,6 +39,12 @@
                 @endforeach
                 
             </tbody>
+            <tfoot class="table-head text-center ">
+                <th class="col">الإسم</th>
+                <th class="col">رب الأسرة</th>
+                <th class="col">المشرف</th>
+                <th class="col">العملية</th>
+            </tfoot>
 
         </table>
     </div>

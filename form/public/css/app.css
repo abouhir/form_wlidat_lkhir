@@ -72,6 +72,12 @@
   }
 }
 
+.text-show{
+  font-family: "Cairo";
+  font-weight: bolder;
+  
+ 
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

@@ -7,7 +7,7 @@
    "lien_create" => "responsable.create"
 ])
 @section('content')
-<div class="container">
+<div class="container py-4">
 <div class="card text-center">
     <div class="card-header fw-bold fs-3 text-show show-hd-ft-clr">
         {{$responsable->name}}

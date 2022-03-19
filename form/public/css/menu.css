@@ -23,6 +23,7 @@ html, body {margin: 20; height: 100%; overflow: hidden}
     border-radius: 100px;
     color: white;
     font-size: large;
+    font-weight: bolder;
 }
 
 .lien-menu{
@@ -54,7 +55,33 @@ html, body {margin: 20; height: 100%; overflow: hidden}
 
 .scrollbar{
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100vh;
+}
+.scrollbar::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+    background-color: #7CFF01;
+}
+
+    
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color:red ;
+    border-right: none;
+    border-left: none;
+    border-radius: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track-piece:end {
+    background: #7CFF01;
+    margin-bottom: 10px; 
+    border-radius: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track-piece:start {
+    background: #7CFF01;
+    margin-top: 10px;
+    border-radius: 20px;
 }
 
 .table-head{
@@ -105,5 +132,16 @@ html, body {margin: 20; height: 100%; overflow: hidden}
       
   }
 
+  .login-card{
+      border: #E7D09E 2px solid ;
+      border-radius: 20px 20px 20px 20px ;
+  }
+  .login-card-header{
+      background-color: #E7D09E;
+  }
+  .login-body{
+      background-color:#e7d09e5e; 
+     
+  }
 
 

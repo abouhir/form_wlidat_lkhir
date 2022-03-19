@@ -9,7 +9,7 @@
 ])
 @section('content')
 
-<div class="container scrollbar ms-3" id="container">
+<div class="container scrollbar py-4 ms-5" id="container">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-center">
@@ -141,7 +141,7 @@
 <div class="row mb-5">
     <div class="offset-md-3 col-md-4 offset-2 col-8">
         
-            <a href="{{route("home.imprimer",$responsable->mot)}}" id="imprimer" class="btn btn-danger d-grid text-show " style="display : inline"><i class="fa-solid fa-print fa-lg mt-2"></i> <span class="mt-2 fs-5">تحميل</span></a>
+            <a href="{{route("home.imprimer",$responsable->mot)}}" id="imprimer" class="btn btn-danger d-grid text-show mb-5 " style="display : inline"><i class="fa-solid fa-print fa-lg mt-2"></i> <span class="mt-2 fs-5">تحميل</span></a>
         
     </div>
 </div>

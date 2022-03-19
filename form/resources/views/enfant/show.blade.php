@@ -7,7 +7,7 @@
    "lien_create" => "enfant.create"
 ])
 @section('content')
-<div class="container scrollbar">
+<div class="container scrollbar py-4">
 <div class="card text-center">
     <div class="card-header fw-bold fs-3 text-show show-hd-ft-clr">
        <i class="fa-solid fa-child fa-lg"></i>  {{$enfant->name}}

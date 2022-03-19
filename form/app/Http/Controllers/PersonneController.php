@@ -17,7 +17,11 @@ class PersonneController extends Controller
    }
     public function index()
     {
+        if(Auth::user()->role=='admin'){
+            $personnes= Personne::all();
+        }else{
         $personnes= Auth::user()->personnes;
+    }
         return view("personne.index")->with("personnes",$personnes);
     }
 

@@ -11,7 +11,7 @@
 
 
 <div class="container scrollbar">
-   <form onsubmit="return isValid()" action="{{route('responsable.update',$responsable->mot)}}" method="post" id="frm" >
+   <form  action="{{route('responsable.update',$responsable->mot)}}" method="post" id="frm" >
     @csrf 
     @method("PUT")
     <div class="row mt-3">
@@ -59,7 +59,7 @@
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
         <div class="col-md-2 col-10 ">
-            <input type="button"  name="btnSubmit" id="btnsubmit" class="btn  d-grid col-12 btn-form" value="تحديث"  />
+            <input type="button"  name="btnsubmit" id="btnsubmit" class="btn  d-grid col-12 btn-form" value="تحديث"  />
         </div>
         </div>
     </div>
@@ -78,6 +78,7 @@
     var submit = document.getElementById("btnsubmit");
     var form = document.getElementById("frm");
     alertUpdate(submit,form);
+   
 </script>
 
 @endsection

@@ -27,13 +27,14 @@ Toast.fire({
 
 function alertUpdate(btnSubmit,formSubmit){
     btnSubmit.addEventListener("click",function(){
+      console.log("voila");
         const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: 'btn btn-success',
       cancelButton: 'btn btn-danger'
     },
     buttonsStyling: false
-  })
+  });
   
    swalWithBootstrapButtons.fire({
     title: 'هل تريد فعلا التحديث',

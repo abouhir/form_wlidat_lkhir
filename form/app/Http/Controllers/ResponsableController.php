@@ -17,7 +17,12 @@ class ResponsableController extends Controller
     
     public function index()
     {
-        $responsables = Auth::user()->responsables;
+        if(Auth::user()->role=='admin'){
+            $responsables = Responsable::all();
+        }else{
+            $responsables = Auth::user()->responsables;
+        }
+        
         return view("responsable.index")->with("responsables",$responsables);
     }
 

@@ -16,16 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/menu', function () {
-    return view("layouts.right-menu");
-});
+
 
 //responsable 
 Route::get("/responsables","ResponsableController@index")->name("responsable.index");

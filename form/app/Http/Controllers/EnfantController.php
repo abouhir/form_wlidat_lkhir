@@ -15,7 +15,12 @@ class EnfantController extends Controller
     }
     public function index()
     {
-        $enfants = Auth::user()->enfants;
+        if(Auth::user()->role=='admin'){
+            $enfants = Enfant::all();
+        }else{
+           $enfants = Auth::user()->enfants; 
+        }
+        
         return view("enfant.index")->with("enfants",$enfants);
     }
 

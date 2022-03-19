@@ -12,10 +12,10 @@
     @if (count($personnes)>0)
         
    
-    <div class="col-12">
+    <div class="col-12 pb-5">
     <div class="d-flex justify-content-center">
        
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered text-break text-show ">
             <thead class="table-head text-center ">
                 <th class="col">الإسم</th>
                 <th class="col">رب الأسرة</th>
@@ -41,6 +41,12 @@
                 @endforeach
                 
             </tbody>
+            <tfoot class="table-head text-center ">
+                <th class="col">الإسم</th>
+                <th class="col">رب الأسرة</th>
+                <th class="col">المشرف</th>
+                <th class="col">العملية</th>
+            </tfoot>
 
         </table>
     </div>
