@@ -1,7 +1,7 @@
 @extends('layouts.right-menu' , [
    "page_name" => "رب الأسرة" , 
    "action" => "show" , 
-   "search" => true ,
+   "search" => false ,
    "page_active" => "responsable" , 
    "lien_show" => "responsable.index",
    "lien_create" => "responsable.create"

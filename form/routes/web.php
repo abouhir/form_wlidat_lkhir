@@ -36,20 +36,21 @@ Route::put("/responsable/update/{mot}","ResponsableController@update")->name("re
 Route::delete("/responsable/delete/{mot}" , "ResponsableController@destroy")->name("responsable.delete");
 
 //personne
-
+Route::get("/personnes","PersonneController@index")->name("personne.index");
 Route::get("/personne/create","PersonneController@create")->name("personne.create");
 Route::post("/personne/store","PersonneController@store")->name("personne.store");
-Route::get("/personnes","PersonneController@index")->name("personne.index");
+Route::post("/personne/search","PersonneController@search")->name("personne.search");
 Route::get("/personne/{mot}" , "PersonneController@show")->name("personne.show");
 Route::get("/personne/edit/{mot}","PersonneController@edit")->name("personne.edit");
 Route::put("/personne/update/{mot}","PersonneController@update")->name("personne.update");
 Route::delete("/personne/delete/{mot}" , "PersonneController@destroy")->name("personne.delete");
 
 
-//enfant 
+//enfant
+Route::get("/enfants","EnfantController@index")->name("enfant.index"); 
 Route::get("/enfant/create","EnfantController@create")->name("enfant.create");
 Route::post("/enfants","EnfantController@store")->name("enfant.store");
-Route::get("/enfants","EnfantController@index")->name("enfant.index");
+Route::post("/enfant/search","EnfantController@search")->name("enfant.search");
 Route::get("/enfant/{mot}" , "EnfantController@show")->name("enfant.show");
 Route::get("/enfant/edit/{mot}","EnfantController@edit")->name("enfant.edit");
 Route::put("/enfant/update/{mot}","EnfantController@update")->name("enfant.update");

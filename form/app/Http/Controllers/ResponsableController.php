@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Responsable;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class ResponsableController extends Controller
 {
@@ -19,6 +21,7 @@ class ResponsableController extends Controller
     {
         if(Auth::user()->role=='admin'){
             $responsables = Responsable::all();
+           
         }else{
             $responsables = Auth::user()->responsables;
         }
@@ -94,9 +97,47 @@ class ResponsableController extends Controller
     }
 
     public function search(Request $request){
-        $responsables = Auth::user()->responsables->where("cin",$request->cin);
+        if(empty($request->search)){
+            return redirect()->route("responsable.index");
+        }else{
+            
+            //$responsables = Auth::user()->responsables->where("cin","LIKE",$request->cin."%");
+            if(Auth::user()->role=='admin'){
+            $responsables = Responsable::join('users',function($join){
+                $join->on('users.id', '=', 'responsables.user_id');
+            })
+            ->where('cin','LIKE',"%".$request->search."%")
+            ->orWhere('responsables.name','LIKE',"%".$request->search."%")
+            ->orWhere('adresse','LIKE',"%".$request->search."%")
+            ->orWhere('users.name','LIKE',"%".$request->search."%")->get("responsables.*");
+        }else{
+            $responsables = Responsable::join('users',function($join){
+                $join->on('users.id', '=', 'responsables.user_id');
+            })
+            ->where(function($query) use($request) {
+            $query->where('responsables.user_id','=',Auth::id());
+           
+            })    
+            ->where( function($query) use($request) {
+            $query->where('responsables.name','LIKE',"%".$request->search."%")
+            ->orWhere('adresse','LIKE',"%".$request->search."%")
+            ->orWhere('cin','LIKE',"%".$request->search."%")
+            ->orWhere('users.name','LIKE',"%".$request->search."%");
+            })->get("responsables.*");
+                
+               
+            
+        }
+            
+            
+           
+           
+            return view("responsable.index")->with("responsables",$responsables);
+            
+        }
         
-        return view("responsable.index")->with("responsables",$responsables);
+        
+       
     }
 
     public function destroy($mot)

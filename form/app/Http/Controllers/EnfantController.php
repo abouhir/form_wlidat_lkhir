@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enfant;
+use App\Models\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -31,7 +32,11 @@ class EnfantController extends Controller
      */
     public function create()
     {
-        $responsables = Auth::user()->responsables;
+        if(Auth::user()->role=='admin'){
+            $responsables =Responsable::all() ;
+        }else{
+            $responsables = Auth::user()->responsables;
+        }
         return view("enfant.create")->with("responsables",$responsables);
     }
 
@@ -75,7 +80,13 @@ class EnfantController extends Controller
 
     
     public function edit($mot)
-    {   $responsables = Auth::user()->responsables;
+    {   
+        if(Auth::user()->role=='admin'){
+            $responsables =Responsable::all();
+        }else{
+            $responsables = Auth::user()->responsables;
+        }
+    
         $enfant = Enfant::all()->where("mot",$mot)->first();
         return view("enfant.edit")->with(["enfant"=>$enfant,"responsables"=>$responsables]);
     }
@@ -105,6 +116,68 @@ class EnfantController extends Controller
             $enfant->responsable_id=$request->responsable ;
             $enfant->save();
             return redirect()->back()->with("message","تم التحديث بنجاح");
+    }
+
+    
+    public function search(Request $request){
+        if(empty($request->search)){
+            return redirect()->route("enfant.index");
+        }else{
+            
+            //$responsables = Auth::user()->responsables->where("cin","LIKE",$request->cin."%");
+            if(Auth::user()->role=='admin'){
+                $enfants = Enfant::join('users',function($join){
+                $join->on('users.id', '=', 'enfants.user_id');
+            })
+            ->join('responsables',function($join){
+                $join->on('responsables.id', '=', 'enfants.responsable_id');
+            })
+            ->where('enfants.name','LIKE',"%".$request->search."%")
+            ->orWhere('enfants.taille_vtm','LIKE',"%".$request->search."%")
+            ->orWhere('enfants.taille_chaussure','LIKE',"%".$request->search."%")
+            ->orWhere('enfants.niveaux_etd','LIKE',"%".$request->search."%")
+            ->orWhere('enfants.moyenne_s1','LIKE',"%".$request->search."%")
+            ->orWhere('enfants.moyenne_s2','LIKE',"%".$request->search."%")
+            ->orWhere('users.name','LIKE',"%".$request->search."%")
+            ->orWhere('responsables.name','LIKE',"%".$request->search."%")
+            ->get("enfants.*")
+            ;
+        }else{
+            $enfants = Enfant::join('users',function($join){
+                $join->on('users.id', '=', 'enfants.user_id');
+            })
+            ->join('responsables',function($join){
+                $join->on('responsables.id', '=', 'enfants.responsable_id');
+            })
+            ->where(function($query){
+                $query->where('enfants.user_id','=',Auth::id());
+               
+            }) 
+            ->where(
+                function($query) use($request) {
+                    $query->where('enfants.taille_vtm','LIKE',"%".$request->search."%")
+                    ->orWhere('enfants.taille_chaussure','LIKE',"%".$request->search."%")
+                    ->orWhere('enfants.niveaux_etd','LIKE',"%".$request->search."%")
+                    ->orWhere('enfants.moyenne_s1','LIKE',"%".$request->search."%")
+                     ->orWhere('enfants.moyenne_s2','LIKE',"%".$request->search."%")
+                    ->orWhere('enfants.name','LIKE',"%".$request->search."%")
+                    ->orWhere('users.name','LIKE',"%".$request->search."%")
+                    ->orWhere('responsables.name','LIKE',"%".$request->search."%")
+                    ;
+                })
+            ->get("enfants.*");
+            
+        }
+            
+            
+           
+           
+            return view("enfant.index")->with("enfants",$enfants);
+            
+        }
+        
+        
+       
     }
 
    

@@ -1,13 +1,13 @@
 @extends('layouts.right-menu' , [
    "page_name" => "الأفراد" , 
    "action" => "show" , 
-   "search" => true ,
+   "search" => false ,
    "page_active" => "personne" , 
    "lien_show" => "personne.index",
    "lien_create" => "personne.create"
 ])
 @section('content')
-<div class="container scrollbar ">
+<div class="container scrollbar py-4 ">
 <div class="card text-center mb-5">
     <div class="card-header fw-bold fs-3 text-show show-hd-ft-clr">
        <i class="fa-solid fa-person fa-lg"></i>  {{$personne->name}}

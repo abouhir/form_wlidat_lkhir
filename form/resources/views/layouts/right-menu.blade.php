@@ -135,10 +135,10 @@
                     <!-- Left Side Of Navbar -->
                     @if($search) 
                         <ul class="navbar-nav me-md-5 mt-md-0 mt-3 col-md-5 col-12">
-                            <form action="{{route("responsable.search")}}" method="post">
+                            <form action="{{route($page_active.".search")}}" method="post">
                                 @csrf
                                 @method("POST")
-                                <input type="text" name="cin" class="form-control input-form col-12  d-grid" placeholder="بحث" />
+                                <input type="text" name="search" class="form-control input-form col-12   d-grid" placeholder="بحث" />
                             </form>
                         </ul>
                     @endif

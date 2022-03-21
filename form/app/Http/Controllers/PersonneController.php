@@ -28,7 +28,12 @@ class PersonneController extends Controller
     
     public function create()
     {
-        $responsables = Auth::user()->responsables;
+        if(Auth::user()->role=='admin'){
+            $responsables =Responsable::all();
+        }else{
+            $responsables = Auth::user()->responsables;
+        }
+      
         return view("personne.create")->with("responsables",$responsables);
     }
 
@@ -64,9 +69,15 @@ class PersonneController extends Controller
 
    
     public function edit($mot)
-    {
+    {  
         $personne = Personne::all()->where("mot",$mot)->first();
+        if(Auth::user()->role=='admin'){
+        $responsables =Responsable::all();
+        }else{
         $responsables = Auth::user()->responsables;
+    }
+       
+      
         return view("personne.edit")->with(["personne" => $personne , "responsables" => $responsables]);
     }
 
@@ -88,6 +99,55 @@ class PersonneController extends Controller
             $personne->save();  
         return redirect()->back()->with("message","تم التحديث بنجاح");
     }
+
+    public function search(Request $request){
+        if(empty($request->search)){
+            return redirect()->route("personne.index");
+        }else{
+            
+            //$responsables = Auth::user()->responsables->where("cin","LIKE",$request->cin."%");
+            if(Auth::user()->role=='admin'){
+                $personnes = Personne::join('users',function($join){
+                $join->on('users.id', '=', 'personnes.user_id');
+            })
+            ->join('responsables',function($join){
+                $join->on('responsables.id', '=', 'personnes.responsable_id');
+            })
+            ->where('personnes.name','LIKE',"%".$request->search."%")
+            ->orWhere('personnes.fonctionnelle','LIKE',"%".$request->search."%")
+            ->orWhere('personnes.competences','LIKE',"%".$request->search."%")
+            ->orWhere('users.name','LIKE',"%".$request->search."%")
+            ->orWhere('responsables.name','LIKE',"%".$request->search."%")
+            ->get("personnes.*");
+        }else{
+            $personnes = personne::join('users',function($join){
+                $join->on('users.id', '=', 'personnes.user_id');
+            })
+            ->join('responsables',function($join){
+                $join->on('responsables.id', '=', 'personnes.responsable_id');
+            })
+            ->where(function($query){
+                $query->where('personnes.user_id','=',Auth::id());
+               
+            }) 
+            ->where(
+                function($query) use($request) {
+                    $query->where('personnes.name','LIKE',"%".$request->search."%")
+                    ->orWhere('personnes.fonctionnelle','LIKE',"%".$request->search."%")
+                    ->orWhere('personnes.competences','LIKE',"%".$request->search."%")
+                    ->orWhere('users.name','LIKE',"%".$request->search."%")
+                    ->orWhere('responsables.name','LIKE',"%".$request->search."%")
+                    ;
+                })
+            ->get("personnes.*");
+
+            
+            
+        }
+
+        return view("personne.index")->with("personnes",$personnes);
+    }
+}
 
     
     public function destroy($mot)
