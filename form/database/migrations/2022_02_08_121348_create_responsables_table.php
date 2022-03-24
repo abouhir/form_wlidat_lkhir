@@ -16,10 +16,16 @@ class CreateResponsablesTable extends Migration
         Schema::create('responsables', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string('age');
             $table->string("cin");
             $table->string("situation");
             $table->text("adresse");
             $table->string("telephone");
+            $table->string('cin_image_recto');
+            $table->string('cin_image_verso');
+            $table->string('handicape');
+            $table->string('type_handicap');
+            $table->text("mot");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')->on('users')

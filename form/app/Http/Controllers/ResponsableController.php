@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Responsable;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class ResponsableController extends Controller
 {
@@ -46,9 +46,33 @@ class ResponsableController extends Controller
             "cin" => "required" , 
             "situation" => "required" , 
             "adresse" => "required" , 
-            "telephone" => "required"
+            "telephone" => "required" , 
+            "cin_image_recto" => "image|mimes:jpeg,png,jpg" , 
+            "cin_image_verso" => "image|mimes:jpeg,png,jpg",
+            "handicape" => "required" , 
+            "age"=> "required"
         ]);
 
+        $input=$request->all();
+        if($request->hasFile("cin_image_recto")){
+            $destination_image ="/cin_images" ;
+            $image = $request->file("cin_image_recto");
+            $imageName = str_replace(" ","","cin_recto_".$request->name."_".$image->getClientOriginalName()) ;
+            $request->file("cin_image_recto")->storeAs($destination_image,$imageName);
+            $input['cin_image_recto'] = $imageName;
+        }
+        if($request->hasFile("cin_image_verso")){
+            $destination_image ="/cin_images" ;
+            $image = $request->file("cin_image_verso");
+            $imageName = str_replace(" ","","cin_verso_".$request->name."_".$image->getClientOriginalName()) ;
+            $request->file("cin_image_verso")->storeAs($destination_image,$imageName);
+            $input['cin_image_verso'] = $imageName;
+        } 
+        if(empty($request->type_handicap)){
+            $input['type_handicap'] = "0";
+        }
+        
+        
        $responsable= Responsable::create([
             "name" => $request->name , 
             "cin" => $request->cin , 
@@ -56,10 +80,16 @@ class ResponsableController extends Controller
             "adresse" => $request->adresse , 
             "telephone" => $request->telephone , 
             "user_id" => Auth::id() ,
+            "cin_image_recto" => $input['cin_image_recto'] ,
+            "cin_image_verso" => $input['cin_image_verso'] ,
+            "age" => $request->age , 
+            "handicape" => $request->handicape , 
+            "type_handicap" =>  $input['type_handicap'],
             "mot" => Crypt::encryptString($request->name."".$request->cin),
         ]);
 
         return redirect()->route("responsable.index")->with("message","تم الإنشاء بنجاح");
+
 
     }
 
@@ -80,16 +110,53 @@ class ResponsableController extends Controller
             "cin" => "required" , 
             "situation" => "required" , 
             "adresse" => "required" , 
-            "telephone" => "required"
+            "telephone" => "required" , 
+            "cin_image_recto" => "image|mimes:jpeg,png,jpg" , 
+            "cin_image_verso" => "image|mimes:jpeg,png,jpg" , 
+            "handicape" => "required" , 
+            "age"=> "required"
         ]);
 
-       $responsable->name = $request->name ; 
-            
+
+        $input=$request->all();
+        if($request->hasFile("cin_image_recto")){
+            $destination_image ="/cin_images" ;
+            $image = $request->file("cin_image_recto");
+            if(file_exists(public_path("storage/cin_images/"."".$responsable->cin_image_recto))){
+                unlink(public_path("storage/cin_images/"."".$responsable->cin_image_recto));
+            }
+            $imageName = str_replace(" ","","cin_".$request->name."_".$image->getClientOriginalName()) ;
+            $request->file("cin_image_recto")->storeAs($destination_image,$imageName);
+            $input['cin_image_recto'] = $imageName;
+            $responsable->cin_image_recto =$input['cin_image_recto'];
+        }
+
+        if($request->hasFile("cin_image_verso")){
+            $destination_image ="/cin_images" ;
+            $image = $request->file("cin_image_verso");
+            if(file_exists(public_path("storage/cin_images/"."".$responsable->cin_image_verso))){
+                unlink(public_path("storage/cin_images/"."".$responsable->cin_image_verso   ));
+            }
+            $imageName = str_replace(" ","","cin_".$request->name."_".$image->getClientOriginalName()) ;
+            $request->file("cin_image_verso")->storeAs($destination_image,$imageName);
+            $input['cin_image_verso'] = $imageName;
+            $responsable->cin_image_verso =$input['cin_image_verso'];
+        }
+
+        $responsable->name = $request->name ;    
         $responsable->cin = $request->cin ;
         $responsable->situation = $request->situation ;
         $responsable->adresse= $request->adresse ;
         $responsable->telephone = $request->telephone ;
-            
+        $responsable->handicape = $request->handicape ;
+        if(empty($request->type_handicap )){
+            $responsable->type_handicap = "0" ;
+        }else{
+            $responsable->type_handicap = $request->type_handicap ;
+        }
+        $responsable->age = $request->age ;
+       
+       
        
         $responsable->save();
 
@@ -128,9 +195,6 @@ class ResponsableController extends Controller
                
             
         }
-            
-            
-           
            
             return view("responsable.index")->with("responsables",$responsables);
             
@@ -142,7 +206,14 @@ class ResponsableController extends Controller
 
     public function destroy($mot)
     {
-        $responsable = Responsable::all()->where("mot",$mot)->first()->delete();
+        $responsable = Responsable::all()->where("mot",$mot)->first();
+        if(file_exists(public_path("storage/cin_images/"."".$responsable->cin_image_recto))){
+            unlink(public_path("storage/cin_images/"."".$responsable->cin_image_recto));
+        }
+        if(file_exists(public_path("storage/cin_images/"."".$responsable->cin_image_verso))){
+            unlink(public_path("storage/cin_images/"."".$responsable->cin_image_verso));
+        }
+        $responsable->delete();
         return redirect()->route("responsable.index")->with("message","تم الحدف بنجاح");
     }
 }

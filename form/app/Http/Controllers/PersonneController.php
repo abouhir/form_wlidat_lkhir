@@ -45,14 +45,23 @@ class PersonneController extends Controller
             "name" => "required|max:255" , 
             "fonctionnelle" => "required" , 
             "competences" => "required" , 
+            "handicape" => "required" , 
+            "age"=> "required"
         ]);
+        $input=$request->all();
+        if(empty($request->type_handicap)){
+            $input['type_handicap'] = "0";
+        }
 
         $personne = Personne::create([
             "name"=>$request->name , 
             "fonctionnelle" => $request->fonctionnelle , 
             "competences" => $request->competences ,
             "user_id" => Auth::id() , 
-            "responsable_id" => $request->responsable , 
+            "responsable_id" => $request->responsable ,
+            "age" => $request->age , 
+            "handicape" => $request->handicape , 
+            "type_handicap" => $input['type_handicap'], 
             "mot" =>Crypt::encryptString((Personne::max('id')+1)."".$request->name)
         ]);
        
@@ -89,6 +98,8 @@ class PersonneController extends Controller
             "name" => "required|max:255" , 
             "fonctionnelle" => "required" , 
             "competences" => "required" , 
+            "handicape" => "required" , 
+            "age"=> "required"
         ]);
 
         
@@ -96,6 +107,14 @@ class PersonneController extends Controller
             $personne->fonctionnelle = $request->fonctionnelle ;
             $personne->competences = $request->competences ;
             $personne->responsable_id= $request->responsable ;
+            $personne->handicape = $request->handicape ;
+        if(empty($request->type_handicap )){
+            $personne->type_handicap = "0" ;
+        }else{
+            $personne->type_handicap = $request->type_handicap ;
+        }
+        $personne->age = $request->age ;
+       
             $personne->save();  
         return redirect()->back()->with("message","تم التحديث بنجاح");
     }

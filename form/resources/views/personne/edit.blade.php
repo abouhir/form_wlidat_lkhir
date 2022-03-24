@@ -52,11 +52,52 @@
            
         </div>
         </div>
+
+        <div class="row mt-3"> 
+            <div class="d-flex justify-content-center">
+            <div class="col-md-5 col-10 ">
+                <input type="number" value="{{$personne->age}}" dir="rtl" name="age" id="age" min="10"  class="form-control input-form number-rtl" placeholder="السن (*)   "  required />
+            </div>
+            </div>
+        </div>
+    
+        <div class="row mt-3">
+            <div class="d-flex justify-content-center">
+          <div class="col-md-5 col-10 ">
+                 <select name="handicape" id="handicap" class="form-select input-form " required>
+                    <option value="{{$personne->handicape}}" selected><--  {{$personne->handicape}}--></option>
+                    <option   value="نعم"   >    نعم   </option>
+                    <option value="لا">لا</option>
+                  
+                </select>
+                
+            </div>
+            </div>
+        </div>
+    
+        <div class="row mt-3">
+            <div class="d-flex justify-content-center">
+          <div class="col-md-5 col-10">
+                 <select name="type_handicap" id="type-handicap" class="form-select input-form"   disabled>
+                    <option value="@php echo  $personne->type_handicap =="0" ? "لاتوجد أي إعاقة" :  $personne->type_handicap @endphp"  selected> <--@php echo  $personne->type_handicap =="0" ? "لاتوجد أي إعاقة" :  $personne->type_handicap @endphp--> <option>
+                    <option value="الإعاقة البصرية"   >         الإعاقة البصرية            </option>
+                    <option value="الإعاقة السمعية">الإعاقة السمعية</option>
+                    <option value="الإعاقة الجسمية والحركية ">الإعاقة الجسمية والحركية </option>
+                    <option value="صعوبات التعلم ">صعوبات التعلم </option>
+                    <option value="اضطرابات النطق والكلام ">اضطرابات النطق والكلام </option>
+                    <option value="الاضطرابات السلوكية والانفعالية ">الاضطرابات السلوكية والانفعالية </option>
+                    <option value="التوحد   ">التوحد   </option>
+                    <option value=" الإعاقات المزدوجة والمتعددة">الإعاقات المزدوجة والمتعددة </option>
+                </select>
+                
+            </div>
+            </div>
+        </div>
     </div>
         <div class="row mt-3">  
             <div class="d-flex justify-content-center">
             <div class="col-md-5 col-10 ">
-                <textarea name="competences" id="competences"  class="form-control input-form keyboardInput " placeholder="المهاراة" >{{$personne->competences}}</textarea>
+                <textarea name="competences" id="competences"  class="form-control input-form keyboardInput " placeholder="المهارات" >{{$personne->competences}}</textarea>
             </div>
             </div>
         </div>
@@ -87,5 +128,40 @@
     var submit = document.getElementById("btnsubmit");
     var form = document.getElementById("frm");
     alertUpdate(submit,form);
+
+
+
+
+
+
+
+
+    var handicap = document.getElementById('handicap');
+    var typeHandicap = document.getElementById('type-handicap');
+
+    if(handicap.value=='نعم'){
+            console.log("oui");
+            typeHandicap.disabled=false;
+            typeHandicap.required=true;
+
+        }else{
+            console.log("non");
+            typeHandicap.disabled=true;
+            typeHandicap.required=false;
+        }
+    
+    handicap.addEventListener('change',function(e){  
+   
+        if(e.target.value=='نعم'){
+            console.log("oui");
+            typeHandicap.disabled=false;
+            typeHandicap.required=true;
+
+        }else{
+            console.log("non");
+            typeHandicap.disabled=true;
+            typeHandicap.required=false;
+        }
+    });
 </script>
 @endsection

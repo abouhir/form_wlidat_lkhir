@@ -18,7 +18,10 @@ class Enfant extends Model
         "moyenne_s2" , 
         "responsable_id" ,
         "user_id" , 
-        "mot"
+        "mot" , 
+        "handicape" , 
+        "type_handicap" , 
+        "age"
     ];
 
     public function user()

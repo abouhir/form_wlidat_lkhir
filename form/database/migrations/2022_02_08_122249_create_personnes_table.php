@@ -17,8 +17,12 @@ class CreatePersonnesTable extends Migration
         Schema::create('personnes', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string('age');
             $table->string("fonctionnelle");
             $table->text("competences");
+            $table->string('handicape');
+            $table->string('type_handicap');
+            $table->text("mot");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')->on('users')

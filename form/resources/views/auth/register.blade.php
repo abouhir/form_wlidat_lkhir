@@ -15,8 +15,8 @@
             <div class="card login-card">
                
                     
-                    <div class="card-header text-center text-show login-card-header fs-4">
-                        <img width="100" class="rounded-circle"  src="{{asset("images/wlidat-lkhir.jpg")}}" alt="logo wlidat lkhir" />
+                    <div class=" text-center text-show login-card-header fs-4">
+                        <img width="100"  class="rounded-circle mb-2"  src="{{asset("images/wlidat-lkhir.jpg")}}" alt="logo wlidat lkhir" />
                        <br> 
                        <span class="mt-5 mb-5">{{ __('إضافة مشرف') }}</span>
                        

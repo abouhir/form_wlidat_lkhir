@@ -15,7 +15,10 @@ class Personne extends Model
         "competences" ,
         "user_id" , 
         "responsable_id" , 
-        "mot"
+        "mot" , 
+        "age" , 
+        "handicape" ,
+        "type_handicap"
     ];
 
 

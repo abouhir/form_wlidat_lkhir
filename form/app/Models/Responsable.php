@@ -16,7 +16,12 @@ class Responsable extends Model
         "situation" , 
         "adresse" , 
         "telephone" , 
-        "mot"
+        "mot" ,
+        "cin_image_recto" , 
+        "cin_image_verso" , 
+        "handicape" , 
+        "type_handicap" ,
+        "age"
     ];
 
 

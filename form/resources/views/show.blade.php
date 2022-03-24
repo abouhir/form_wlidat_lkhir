@@ -9,10 +9,10 @@
 ])
 @section('content')
 
-<div class="container scrollbar py-4 ms-5" id="container">
+<div class="container scrollbar py-4 ms-5 me-5 pe-5" id="container">
     <div class="row">
         <div class="col-12">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center ">
                 <img width="100px" src="{{asset('images/wlidat-lkhir.jpg')}}" class="rounded-circle" alt="logo wlidat lkhir" />
            
             </div>
@@ -37,6 +37,19 @@
            <span class="text-show fs-5"> {{$responsable->cin}}</span>
         </div>
     </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6 col-12">
+             <label class="fs-5 fw-bold text-show text-lbl"> من دوي الإحتياجات الخاصة :</label>
+            <span class="text-show fs-5"> {{$responsable->handicape}} </span>
+        </div>
+        @if ($responsable->type_handicap!="0")
+        <div class="col-md-6 col-12 mt-md-0 mt-3">
+            <label class="text-show text-lbl fs-5 fw-bold">نوع الإعاقة    :</label>
+           <span class="text-show fs-5"> {{$responsable->type_handicap}}</span>
+        </div>
+        @endif
+    </div>
    
     <div class="row mt-3">
         <div class="col-12">
@@ -56,6 +69,20 @@
            <span class="text-show fs-5"> {{$responsable->telephone}}</span>
         </div>
       
+    </div>
+    <div class="row mt-4">
+        <label class="fs-5 fw-bold text-lbl text-show">  البطاقة الوطنية:</label>
+    </div>
+
+    <div class="row mt-4 me-5">
+       
+        <div class="col-md-6 col-12 ">
+            <img width="50%" height="200px" class=" col-12   img-fluide" id="img-profile"  src="{{asset('storage/cin_images/'.$responsable->cin_image_recto)}}"  />
+             
+        </div>
+        <div class="col-md-6 col-12">
+            <img width="50%" height="200px" class=" col-12 mt-2 img-fluide" id="img-profile"  src="{{asset('storage/cin_images/'.$responsable->cin_image_verso)}}"  />
+        </div>
     </div>
   
     
@@ -83,7 +110,7 @@
 </div>
 <div class="row mt-3">
     <div class="col-11">
-        <label class="text-show text-lbl fs-5 fw-bold  ">المهاراة :</label>
+        <label class="text-show text-lbl fs-5 fw-bold  ">المهارات :</label>
         <span class="text-show fs-5 text-justify text-break ">{{$item->competences}}</span>
     </div>
 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.right-menu' , [
    "page_name" => "الصفحة الرئيسية" , 
    "action" => "" , 
-   "search" => false,
+   "search" => true,
    "page_active" => "home" , 
    "lien_show" => "responsable.index",
    "lien_create" => "responsable.create"

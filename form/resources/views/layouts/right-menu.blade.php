@@ -12,12 +12,17 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/alert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/imageDisplay.js') }}" type="text/javascript"></script>
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito|Cairo" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -138,7 +143,7 @@
                             <form action="{{route($page_active.".search")}}" method="post">
                                 @csrf
                                 @method("POST")
-                                <input type="text" name="search" class="form-control input-form col-12   d-grid" placeholder="بحث" />
+                                <input type="text" name="search" class="form-control input-form col-12a  d-grid" placeholder="بحث" />
                             </form>
                         </ul>
                     @endif

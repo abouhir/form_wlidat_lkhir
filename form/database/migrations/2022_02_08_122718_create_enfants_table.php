@@ -17,11 +17,15 @@ class CreateEnfantsTable extends Migration
         Schema::create('enfants', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string('age');
             $table->string("taille_vtm");
             $table->string("taille_chaussure");
             $table->string("niveaux_etd");
             $table->float("moyenne_s1");
             $table->float("moyenne_s2");
+            $table->string('handicape');
+            $table->string('type_handicap');
+            $table->text("mot");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
             ->references('id')->on('users')

@@ -50,9 +50,15 @@ class EnfantController extends Controller
          "niveaux_etd"=>"required" , 
          "moyenne_s1"=>"required" ,
          "moyenne_s2"=>"required",
-         "responsable" => "required"
+         "responsable" => "required" , 
+         "handicape" => "required" , 
+         "age"=> "required"
 
      ]);
+     $input=$request->all();
+     if(empty($request->type_handicap)){
+        $input['type_handicap'] = "0";
+    }
      $enfant = Enfant::create([
          "name"=> $request->name , 
          "taille_vtm" => $request->taille_vtm , 
@@ -62,6 +68,9 @@ class EnfantController extends Controller
          "moyenne_s2"=>$request->moyenne_s2 , 
          "responsable_id"=>$request->responsable , 
          "user_id" => Auth::id() , 
+         "age" => $request->age , 
+         "handicape" => $request->handicape , 
+         "type_handicap" => $input['type_handicap'],
          "mot" => Crypt::encryptString((Enfant::max('id')+1)."".$request->name)
          ]) ; 
 
@@ -103,7 +112,9 @@ class EnfantController extends Controller
             "niveaux_etd"=>"required" , 
             "moyenne_s1"=>"required" ,
             "moyenne_s2"=>"required",
-            "responsable" => "required"
+            "responsable" => "required" , 
+            "handicape" => "required" , 
+            "age"=> "required"
    
         ]);
       
@@ -114,6 +125,14 @@ class EnfantController extends Controller
             $enfant->moyenne_s1= $request->moyenne_s1 ;
             $enfant->moyenne_s2=$request->moyenne_s2 ;
             $enfant->responsable_id=$request->responsable ;
+            $enfant->handicape = $request->handicape ;
+            if(empty($request->type_handicap )){
+                $enfant->type_handicap = "0" ;
+            }else{
+                $enfant->type_handicap = $request->type_handicap ;
+            }
+            $enfant->age = $request->age ;
+           
             $enfant->save();
             return redirect()->back()->with("message","تم التحديث بنجاح");
     }

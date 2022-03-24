@@ -56,7 +56,41 @@
                         </strong>
                         <span style="font-size: 13px;" > {{$responsable->cin}} </span>
                     </td>
-                </tr>  
+                </tr> 
+
+                <tr>
+                    <td colspan="2">
+                        <strong>
+                            <label style="color: #7CFF01; font-size: 18px;">السن:</label>
+                        </strong>    
+                        <span style="font-size: 13px;"> {{$responsable->age}}</span>
+                    </td>
+                    
+                </tr>
+                 
+
+
+                <tr>
+                    <td>
+                        <strong>
+                            <label style="color: #7CFF01; font-size: 18px;  ">من دوي الإحتياجات الخاصة:</label>
+                        </strong>
+                        <span style="font-size: 13px;" > {{$responsable->handicape}} </span>
+                    </td>
+                    @if ($responsable->type_handicap!="0")
+                        
+                    
+                    <td>
+                        <strong>
+                            <label style="color: #7CFF01; font-size: 18px;">نوع الإعاقة  :</label>
+                        </strong>
+                        <span style="font-size: 13px;" > {{$responsable->type_handicap}} </span>
+                    </td>
+                    @endif
+                </tr> 
+
+
+
                 <tr>
                     <td colspan="2">
                         <strong>
@@ -64,6 +98,7 @@
                         </strong>    
                         <span style="font-size: 13px;"> {{$responsable->adresse}}</span>
                     </td>
+                    
                 </tr>
                 <tr>
                     <td>
@@ -78,7 +113,9 @@
                         </strong> 
                         <span style="font-size: 13px;">{{$responsable->telephone}}</span>
                     </td>
+                   
                 </tr><br>
+               
                 <!--  الأفراد      : -->
                 <tr>
                     <th colspan="2"><strong style="font-size: 20px; color: red;" >الأفراد<br><hr></strong> </th>
@@ -93,18 +130,51 @@
                             </strong>
                             <span style="font-size: 13px;">{{$item->name}}</span>
                         </td>
+                        
+                        
+                            
                         <td>
+                            <strong>
+                                <label style="color: #7CFF01; font-size: 18px;">السن:</label>
+                            </strong>    
+                                <span style="font-size: 13px;"> {{$item->age}}</span>
+                        </td>
+                                
+                            
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
                             <strong>
                                 <label style="color: #7CFF01; font-size: 18px;">عامل:</label>
                             </strong>
                             <span style="font-size: 13px;">{{$item->fonctionnelle}}</span>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>
+                            <strong>
+                                <label style="color: #7CFF01; font-size: 18px;  ">من دوي الإحتياجات الخاصة:</label>
+                            </strong>
+                            <span style="font-size: 13px;"> {{$item->handicape}} </span>
+                        </td>
+                        @if ($item->type_handicap!="0")
+                            
+                        
+                        <td>
+                            <strong>
+                                <label style="color: #7CFF01; font-size: 18px;">نوع الإعاقة  :</label>
+                            </strong>
+                            <span style="font-size: 13px;" > {{$item->type_handicap}} </span>
+                        </td>
+                        @endif
+                    </tr> 
                    
                     <tr>
                         <td colspan="2">
                             <strong>
-                                <label style="color: #7CFF01; font-size: 18px;">المهاراة:</label>
+                                <label style="color: #7CFF01; font-size: 18px;">المهارات:</label>
                                 
                             </strong>
                             <span  style="text-align: justify; font-size: 13px;">{{$item->competences}}</span>
@@ -135,13 +205,42 @@
                     </strong>
                     <span style="font-size: 13px;">{{$item->name}}</span>
                 </td>
-                <td>
-                    <strong>
-                        <label style="color: #7CFF01; font-size: 18px;">قياس الملابس :</label>
-                    </strong>
-                    <span style="font-size: 13px;"> {{$item->taille_vtm}}</span>
+                <td>                    <strong>
+                    <label style="color: #7CFF01; font-size: 18px;">السن:</label>
+                </strong>    
+                    <span style="font-size: 13px;"> {{$item->age}}</span>
+                   
                 </td>
             </tr>
+
+            <tr>
+                      
+                <td colspan="2">
+                    <strong>
+                        <label style="color: #7CFF01; font-size: 18px;">المستوى الدراسي:</label>
+                    </strong>
+                    <span style="font-size: 13px;">{{$item->niveaux_etd}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <strong>
+                        <label style="color: #7CFF01; font-size: 18px;  ">من دوي الإحتياجات الخاصة:</label>
+                    </strong>
+                    <span style="font-size: 13px;"> {{$item->handicape}} </span>
+                </td>
+                @if ($item->type_handicap!="0")
+                    
+                
+                <td>
+                    <strong>
+                        <label style="color: #7CFF01; font-size: 18px;">نوع الإعاقة  :</label>
+                    </strong>
+                    <span style="font-size: 13px;" > {{$item->type_handicap}} </span>
+                </td>
+                @endif
+            </tr> 
             <tr>
                 <td>
                     <strong>
@@ -151,9 +250,9 @@
                 </td>
                 <td>
                     <strong>
-                        <label style="color: #7CFF01; font-size: 18px;">المستوى الدراسي:</label>
+                        <label style="color: #7CFF01; font-size: 18px;">قياس الملابس :</label>
                     </strong>
-                    <span style="font-size: 13px;">{{$item->niveaux_etd}}</span>
+                    <span style="font-size: 13px;"> {{$item->taille_vtm}}</span>
                 </td><br>
             </tr>
             

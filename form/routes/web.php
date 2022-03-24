@@ -58,10 +58,11 @@ Route::delete("/enfant/delete/{mot}" , "EnfantController@destroy")->name("enfant
 
 
 
-Route::get("/pdf/{mot}","HomeController@show")->name("home.show");
-Route::get("/Imprimer/{mot}","HomeController@imprimer")->name("home.imprimer");
+Route::get("home/pdf/{mot}","HomeController@show")->name("home.show");
+Route::get("home/imprimer/{mot}","HomeController@imprimer")->name("home.imprimer");
+Route::post("home/search","HomeController@search")->name("home.search");
 
 Route::get("/test/{mot}",function($mot){    $responsable = Responsable::all()->where("mot",$mot)->first();
-    return view("pdf")->with("responsable",$responsable);})->name("home.test");
+ return view("pdf")->with("responsable",$responsable);})->name("home.test");
 
 

@@ -14,6 +14,11 @@
     </div>
     <div class="card-body">
       <h5 class="card-title fs-4 text-show"><span class="text-lbl">رب االأسرة  :</span> {{$enfant->responsable->name}}   </h5>
+      <p class="card-text fs-4 text-show"><span class="text-lbl"> السن   :</span> {{$enfant->age}}</p>
+      <p class="card-text fs-4 text-show"><span class="text-lbl">يعاني من إعاقة  :</span> {{$enfant->handicape}}</p>
+      @if ($enfant->type_handicap!="0")
+           <p class="card-text fs-4 text-show"><span class="text-lbl">  نوع الإعاقة  :</span> {{$enfant->type_handicap}}</p>
+      @endif
       <p class="card-text fs-4 text-show"><span class="text-lbl">قياس الملابس  :</span> {{$enfant->taille_vtm}}</p>
       <p class="card-text fs-4 text-show"><span class="text-lbl"> قياس الحداء :</span> {{$enfant->taille_chaussure}}</p>
       <p class="card-text fs-4 text-show"><span class="text-lbl">  المستوى الدراسي :</span> {{$enfant->niveaux_etd}}</p>

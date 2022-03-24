@@ -35,6 +35,44 @@ class HomeController extends Controller
         return view("show")->with("responsable",$responsable);
     }
 
+    public function search(Request $request){
+        if(empty($request->search)){
+            return redirect()->route("personne.index");
+        }else{
+            
+            //$responsables = Auth::user()->responsables->where("cin","LIKE",$request->cin."%");
+            if(Auth::user()->role=='admin'){
+                $responsables = Responsable::join('users',function($join){
+                $join->on('users.id', '=', 'responsables.user_id');
+            })
+            ->where('responsables.name','LIKE',"%".$request->search."%")
+            ->orWhere('users.name','LIKE',"%".$request->search."%")
+            ->get("responsables.*");
+        }else{
+            $responsables = Responsable::join('users',function($join){
+                $join->on('users.id', '=', 'responsables.user_id');
+            })
+            ->where(function($query){
+                $query->where('responsables.user_id','=',Auth::id());
+               
+            }) 
+            ->where(
+                function($query) use($request) {
+                    $query->where('users.name','LIKE',"%".$request->search."%")
+                    ->orWhere('responsables.name','LIKE',"%".$request->search."%")
+                    ;
+                })
+            ->get("responsables.*");
+
+            
+            
+        }
+
+        return view("home")->with("responsables",$responsables);
+    }
+}
+
+
     public function imprimer($mot){
         
         $responsable = Responsable::all()->where("mot",$mot)->first();
@@ -83,6 +121,12 @@ class HomeController extends Controller
     $pdf->Image($img_file, 170, 5, 30, 30, '', '', '', false, 350, '', false, false, 0);
     
     $pdf->writeHTML($html_content, true, false, true, false, '');
+    $pdf->AddPage();
+    $pdf->Image($img_file, 95, 5, 30, 30, '', '', '', false, 350, '', false, false, 0);
+    $pdf->Text(80, 35, 'البطاقة الوطنية');
+    $pdf->Image(public_path("storage/cin_images/"."".$responsable->cin_image_verso), 55, 150, 120, 70, '', '', '', false, 350, '', false, true, 0);
+    $pdf->Image(public_path("storage/cin_images/"."".$responsable->cin_image_recto), 55, 60, 120, 70, '', '', '', false, 350, '', false, true, 0);
+   
     ob_end_clean();
     $pdf->Output();
   
