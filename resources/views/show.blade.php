@@ -9,7 +9,7 @@
 ])
 @section('content')
 
-<div class="container scrollbar py-4 ms-5 me-5 pe-5" id="container">
+<div class="container scrollbar py-4  me-3 pe-1" id="container">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-center ">
@@ -72,12 +72,13 @@
     </div>
     <div class="row mt-4">
         <label class="fs-5 fw-bold text-lbl text-show">  البطاقة الوطنية:</label>
+        
     </div>
 
-    <div class="row mt-4 me-5">
+    <div class="row mt-4 me-md-5 ms-0">
        
         <div class="col-md-6 col-12 ">
-            <img width="50%" height="200px" class=" col-12   img-fluide" id="img-profile"  src="{{asset('storage/cin_images/'.$responsable->cin_image_recto)}}"  />
+            <img width="50%" height="200px" class="col-12   img-fluide" id="img-profile"  src="{{asset('storage/cin_images/'.$responsable->cin_image_recto)}}"  />
              
         </div>
         <div class="col-md-6 col-12">

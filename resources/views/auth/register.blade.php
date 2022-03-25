@@ -1,17 +1,14 @@
+@extends('layouts.right-menu' , [
+   "page_name" => "المشرف" , 
+   "action" => "add" , 
+   "search" => false,
+   "page_active" => "admin" , 
+   "lien_show" => "responsable.index",
+   "lien_create" => "responsable.create"
+])
 
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-
+@section('content')
 <div class="container scrollbar ">
     <div class="row justify-content-center  py-4 mt-5 pe-3 ps-4 mb-5 pb-5">
         <div class="col-md-8 mb-5">
@@ -120,6 +117,5 @@
       alertSuccess("{!!Session::get('message')!!}")
     </script>
 @endif
-</body>
-</html>
+@endsection
 

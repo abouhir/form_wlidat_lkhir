@@ -128,7 +128,7 @@ class HomeController extends Controller
     $pdf->Image(public_path("storage/cin_images/"."".$responsable->cin_image_recto), 55, 60, 120, 70, '', '', '', false, 350, '', false, true, 0);
    
     ob_end_clean();
-    $pdf->Output();
+    $pdf->Output($responsable->name.".pdf","D");
   
     }
     
