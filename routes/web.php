@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('test/register', function () {
-    return view('auth.register');
-})->name("test.register");
+
 
 Auth::routes();
 
