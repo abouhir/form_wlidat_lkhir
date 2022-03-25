@@ -99,7 +99,7 @@ class HomeController extends Controller
        
       
     
-    $pdf->write2DBarcode(asset("/home/pdf/".$mot), 'QRCODE,L', 20, 5, 30, 30, $style, 'N');
+    $pdf->write2DBarcode(asset("/Imprimer/".$mot), 'QRCODE,L', 20, 5, 30, 30, $style, 'N');
     
       
 
