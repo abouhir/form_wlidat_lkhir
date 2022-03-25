@@ -130,7 +130,7 @@ class HomeController extends Controller
    
     ob_end_clean();
     $file_name= $responsable->name.".pdf";
-    $pdf->Output($file_name,"D");
+    $pdf->Output();
   
     }
     
