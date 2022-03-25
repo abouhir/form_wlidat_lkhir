@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 </head>
 <body>
@@ -30,7 +29,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
-                      
+                        @csrf
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end text-show text-lbl   fs-5">{{ __('الإسم') }}</label>
