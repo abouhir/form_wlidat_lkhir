@@ -89,7 +89,7 @@ class HomeController extends Controller
         $view = view("pdf")->with("responsable",$responsable);
         $html_content = $view->render();
        $pdf = new TCPDF();
-        $img_file = K_PATH_IMAGES.'wlidat-lkhir.jpg';
+        $img_file =public_path("images/wlidat-lkhir.jpg");
       $pdf->SetPrintHeader(false);
        $pdf->SetPrintFooter(false);
        $pdf->SetTitle($responsable->name);
