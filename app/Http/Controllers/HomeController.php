@@ -76,7 +76,7 @@ class HomeController extends Controller
     public function imprimer($mot){
         
         $responsable = Responsable::all()->where("mot",$mot)->first();
-        
+       
         $style = array(
            
             'vpadding' => 'auto',
@@ -99,7 +99,8 @@ class HomeController extends Controller
        
       
     
-    $pdf->write2DBarcode(asset("/home/pdf/".$mot), 'QRCODE,L', 20, 5, 30, 30, $style, 'N');
+    $pdf->write2DBarcode(asset("home/pdf/".$mot), 'QRCODE,L', 20, 5, 30, 30, $style, 'N');
+    
       
 
     $lg = Array();
@@ -128,7 +129,8 @@ class HomeController extends Controller
     $pdf->Image(public_path("storage/cin_images/"."".$responsable->cin_image_recto), 55, 60, 120, 70, '', '', '', false, 350, '', false, true, 0);
    
     ob_end_clean();
-    $pdf->Output($responsable->name.".pdf","D");
+    $file_name= $responsable->name.".pdf";
+    $pdf->Output();
   
     }
     
