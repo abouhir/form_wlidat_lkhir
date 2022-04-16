@@ -14,19 +14,20 @@ class ResponsableController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
     
     public function index()
     {
-        if(Auth::user()->role=='admin'){
+        //if(Auth::user()->role=='admin'){
             $responsables = Responsable::all();
            
-        }else{
-            $responsables = Auth::user()->responsables;
-        }
+        //}else{
+            //$responsables = Auth::user()->responsables;
+       // }
         
-        return view("responsable.index")->with("responsables",$responsables);
+        //return view("responsable.index")->with("responsables",$responsables);
+        return response()->json($responsables);
     }
 
     public function show($mot){
