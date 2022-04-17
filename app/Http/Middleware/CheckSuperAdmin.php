@@ -19,7 +19,7 @@ class CheckSuperAdmin
     {
 
         if(Auth::user()->role!="admin"){
-            return redirect()->route("home.show");
+            return redirect()->route("home");
         }
         return $next($request);
     }
